@@ -1,7 +1,7 @@
 library(shiny)
 library(DT)
 
-not_dead_predictions=read.csv("got_predictions_after_EP2.csv")
+not_dead_predictions=read.csv("got_predictions_EP2_fixed.csv")
 not_dead_predictions$image=paste0('<img src="got_images/',not_dead_predictions$image,'" height="80"></img>')
 not_dead_predictions=not_dead_predictions[,-2]
 
