@@ -4,3 +4,7 @@
 .Ruserdata
 
 *.history
+
+*.dcf
+
+models/first_models.RData
