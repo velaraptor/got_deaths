@@ -2,11 +2,14 @@ library(shiny)
 library(DT)
 
 ep2=read.csv("got_predictions_EP2_fixed.csv")
-ge=merge(ep3,ep2[,c(1,3)],by="name")
-ge$dead_rate_change=ge$dead_prob.x-ge$dead_prob.y
 
 
 not_dead_predictions=read.csv("got_predictions_EP3_fixed.csv")
+
+ge=merge(not_dead_predictions,ep2[,c(1,3)],by="name")
+ge$dead_rate_change=ge$dead_prob.x-ge$dead_prob.y
+
+
 not_dead_predictions$image=paste0('<img src="got_images/',not_dead_predictions$image,'" height="80"></img>')
 not_dead_predictions=not_dead_predictions[,-2]
 
