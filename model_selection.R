@@ -6,7 +6,7 @@ library(caret)
 
 ##==============================
 
-got=read.csv("gotupdated_1.csv")
+got=read.csv("gotupdatedEP3.csv")
 
 got=got[,c(1:17,20,21,24)]
 got_name=got[,1]
@@ -27,18 +27,18 @@ got_test_name=got_name[-train_ind]
 ##==============================
 
 rf=randomForest(x=got_train[,1:(ncol(got_train)-1)],y=as.factor(got_train[,ncol(got_train)]),ntree=1000,probabilities=T)
-svm_model=svm(x=got_train[,1:ncol(got_train)-1)],y=as.factor(got_train[,ncol(got_train)]))
+svm_model=svm(x=got_train[,1:(ncol(got_train)-1)],y=as.factor(got_train[,ncol(got_train)]))
 
 
-pred_svm_train=predict(svm_model,newdata = got_train[, 1:ncol(got_train)-1)])
-pred_rf_train=predict(rf,newdata = got_train[,1:ncol(got_train)-1)])
+pred_svm_train=predict(svm_model,newdata = got_train[, 1:(ncol(got_train)-1)])
+pred_rf_train=predict(rf,newdata = got_train[,1:(ncol(got_train)-1)])
 
 
 predDF_train=data.frame(pred_svm_train,pred_rf_train,death=got_train$Death)
 combModFit.gbm <- train(as.factor(death) ~ ., method = "gbm",data=predDF_train)
 
-combPred.gbm <- predict(combModFit.gbm, predDF_train)
 
+combPred.gbm <- predict(combModFit.gbm, predDF_train)
 
 accuracy_train <- rbind(confusionMatrix(combPred.gbm, got_train$Death)$overall[1], 
                   confusionMatrix(pred_svm_train, got_train$Death)$overall[1], 
@@ -48,8 +48,8 @@ accuracy_train
 
 ##==============================
 
-pred_svm_test=predict(svm_model,newdata = got_test[, 1:ncol(got_train)-1)])
-pred_rf_test=predict(rf,newdata = got_test[,1:ncol(got_train)-1)])
+pred_svm_test=predict(svm_model,newdata = got_test[, 1:(ncol(got_train)-1)])
+pred_rf_test=predict(rf,newdata = got_test[,1:(ncol(got_train)-1)])
 
 
 predDF_test=data.frame(pred_svm_test,pred_rf_test,death=got_test$Death)
@@ -106,7 +106,7 @@ accuracy_test_tester
 notdead=got_new[got_new$Death==0,]
 
 notdead_names=got_name[got_new$Death==0]
-pred_rf_notdead=predict(rf,newdata = notdead[,1:ncol(got_train)-1)],type="prob")
+pred_rf_notdead=predict(rf,newdata = notdead[,1:(ncol(got_train)-1)],type="prob")
 not_dead_predictions=cbind(as.character(notdead_names),pred_rf_notdead)
 not_dead_predictions=as.data.frame(not_dead_predictions)
 

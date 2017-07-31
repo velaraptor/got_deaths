@@ -1,2 +1,3 @@
 library(shiny)
-ui=fluidPage(DT::dataTableOutput('tbl'))
+library(shinythemes)
+ui=fluidPage(theme = shinytheme("united"),DT::dataTableOutput('tbl'))
